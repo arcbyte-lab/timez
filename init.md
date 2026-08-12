@@ -1,1 +1,0 @@
-applicationId="com.arcbyte.timez"
