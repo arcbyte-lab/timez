@@ -1,0 +1,13 @@
+name: timez_core
+description: Pure Dart engine for Timez - time math, segmentation, geometry.
+version: 0.1.0
+
+environment:
+  sdk: '>=3.12.2 <4.0.0'
+
+dependencies:
+  timezone: ^0.9.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
