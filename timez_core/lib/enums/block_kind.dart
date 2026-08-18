@@ -1,0 +1,1 @@
+enum BlockKind { event, task }
