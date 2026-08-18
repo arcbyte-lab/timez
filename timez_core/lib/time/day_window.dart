@@ -55,13 +55,33 @@ class DayWindow {
     );
     return end.toUtc();
   }
+
+  /// The UTC instant of local noon on this day (used to split segments
+  /// between the AM and PM rings — see docs/03-domain-model.md §4.3).
+  DateTime noonUtc() {
+    _ensureTimeZonesInitialized();
+    final location = tz.getLocation(timeZoneId);
+    final noon = tz.TZDateTime(
+      location,
+      localDate.year,
+      localDate.month,
+      localDate.day,
+      12,
+    );
+    return noon.toUtc();
+  }
 }
 
 /// The local calendar date (year/month/day, time-of-day zeroed) that
 /// [utcInstant] falls on in [timeZoneId].
 DateTime localDateForInstant(DateTime utcInstant, String timeZoneId) {
+  final local = toLocal(utcInstant, timeZoneId);
+  return DateTime(local.year, local.month, local.day);
+}
+
+/// The local wall-clock representation of [instant] in [timeZoneId].
+tz.TZDateTime toLocal(DateTime instant, String timeZoneId) {
   _ensureTimeZonesInitialized();
   final location = tz.getLocation(timeZoneId);
-  final local = tz.TZDateTime.from(utcInstant, location);
-  return DateTime(local.year, local.month, local.day);
+  return tz.TZDateTime.from(instant, location);
 }
