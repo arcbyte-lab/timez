@@ -1,6 +1,7 @@
 /// Pure Dart engine for Timez — no Flutter dependency.
 library timez_core;
 
+export 'color/color_derivation.dart';
 export 'entities/block.dart';
 export 'entities/block_tag.dart';
 export 'entities/tag.dart';
